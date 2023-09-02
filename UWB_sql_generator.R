@@ -47,10 +47,6 @@ add_device <- function(tag_ids) {
   cat(full_sql)
 }
 
-# Test the function
-tags <- c(75, 79, 84)
-add_device(tags)
-
 
 add_plan <- function(tag_ids, interval_8 = 30) {
   base_sql <- "INSERT INTO plan (addr, scenario, interval) VALUES"
