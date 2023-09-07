@@ -36,7 +36,7 @@ add_device <- function(tag_ids) {
 }
 # add backticks because interval is protected
 add_plan <- function(tag_ids, interval_8 = 30) {
-  base_sql <- "INSERT INTO plan (addr, scenario, interval) VALUES"
+  base_sql <- "INSERT INTO plan (addr, scenario, `interval`) VALUES"
   
   value_tuples <- unlist(lapply(tag_ids, function(tag_id) {
     addr <- tag_id + 4096
@@ -46,7 +46,7 @@ add_plan <- function(tag_ids, interval_8 = 30) {
   }))
   
   combined_values <- paste(value_tuples, collapse = ",\n")
-  update_sql <- "ON DUPLICATE KEY UPDATE interval=VALUES(interval)"
+  update_sql <- "ON DUPLICATE KEY UPDATE `interval`=VALUES(`interval`)"
   
   full_sql <- paste(base_sql, combined_values, update_sql, ";")
   cat(full_sql)
