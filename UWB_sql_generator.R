@@ -34,7 +34,7 @@ add_device <- function(tag_ids) {
   full_sql <- paste(base_sql, combined_values, ";")
   cat(full_sql)
 }
-
+# add backticks because interval is protected
 add_plan <- function(tag_ids, interval_8 = 30) {
   base_sql <- "INSERT INTO plan (addr, scenario, interval) VALUES"
   
