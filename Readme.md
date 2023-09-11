@@ -61,14 +61,14 @@ add_plan(tags)
 ```
 **Output**:
 ```sql
-INSERT INTO plan (addr, scenario, interval) VALUES
+INSERT INTO plan (addr, scenario, `interval`) VALUES
 (4171, 8, 30),
 (4171, 12, 60),
 (4175, 8, 30),
 (4175, 12, 60),
 (4180, 8, 30),
 (4180, 12, 60)
-ON DUPLICATE KEY UPDATE interval=VALUES(interval);
+ON DUPLICATE KEY UPDATE `interval`=VALUES(`interval`) ;
 ```
 
 
