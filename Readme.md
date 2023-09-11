@@ -17,8 +17,9 @@ This script provides three R functions to simplify the task of adding tags, devi
 tags <- c(75, 79, 84)
 add_tags(tags)
 ```
-```sql
+
 **Output**:
+```sql
 INSERT INTO tag (id, addr, `group`) VALUES
 (75, 4171, 1),
 (79, 4175, 1),
