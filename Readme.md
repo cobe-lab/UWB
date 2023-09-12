@@ -1,6 +1,6 @@
 # LOPOS-UWB database management
 
-This script provides three R functions to simplify the task of adding tags, devices, and plans into their respective SQL tables. Each function generates SQL `INSERT` statements for the given data.
+This script provides four R functions to simplify the task of adding tags, adding devices, and adding or removing plans into their respective SQL tables. The functions generate either an SQL `INSERT` or `DELETE` statement for the given data.
 
 ## Functions Overview
 
@@ -70,5 +70,19 @@ INSERT INTO plan (addr, scenario, `interval`) VALUES
 (4180, 12, 60)
 ON DUPLICATE KEY UPDATE `interval`=VALUES(`interval`) ;
 ```
+### 4. remove_plan()
+**Purpose**: Generate SQL code to delete tag scenarios from the plan table based on the provided tag IDs.
 
+**Parameters**:
+- `tag_ids`: Vector of tag IDs.
 
+**Example**:
+```R
+tags <- c(75, 79, 84)
+remove_plan(tags)
+```
+
+**Output**:
+```sql
+DELETE FROM plan WHERE (addr = 4171 AND scenario = 8) OR (addr = 4171 AND scenario = 12) OR (addr = 4175 AND scenario = 8) OR (addr = 4175 AND scenario = 12) OR (addr = 4180 AND scenario = 8) OR (addr = 4180 AND scenario = 12);
+```
