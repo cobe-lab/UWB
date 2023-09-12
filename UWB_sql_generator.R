@@ -34,7 +34,7 @@ add_device <- function(tag_ids) {
   full_sql <- paste(base_sql, combined_values, ";")
   cat(full_sql)
 }
-# add backticks because interval is protected
+
 add_plan <- function(tag_ids, interval_8 = 30) {
   base_sql <- "INSERT INTO plan (addr, scenario, `interval`) VALUES"
   
@@ -49,6 +49,22 @@ add_plan <- function(tag_ids, interval_8 = 30) {
   update_sql <- "ON DUPLICATE KEY UPDATE `interval`=VALUES(`interval`)"
   
   full_sql <- paste(base_sql, combined_values, update_sql, ";")
+  cat(full_sql)
+}
+
+remove_plan <- function(tag_ids) {
+  base_sql <- "DELETE FROM plan WHERE"
+  
+  conditions <- unlist(lapply(tag_ids, function(tag_id) {
+    addr <- tag_id + 4096
+    scenario_8_condition <- paste0("(addr = ", addr, " AND scenario = 8)")
+    scenario_12_condition <- paste0("(addr = ", addr, " AND scenario = 12)")
+    return(c(scenario_8_condition, scenario_12_condition))
+  }))
+  
+  combined_conditions <- paste(conditions, collapse = " OR ")
+  
+  full_sql <- paste(base_sql, combined_conditions, ";")
   cat(full_sql)
 }
 
